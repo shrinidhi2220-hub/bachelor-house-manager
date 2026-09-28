@@ -1,0 +1,10 @@
+{
+  "name": "bachelor-house-manager",
+  "private": true,
+  "version": "6.2.8",
+  "scripts": {
+    "backend:dev": "npm --prefix backend run dev",
+    "frontend:dev": "npm --prefix frontend run dev",
+    "build": "npm --prefix frontend run build"
+  }
+}

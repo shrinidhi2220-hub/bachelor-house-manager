@@ -1,0 +1,29 @@
+{
+  "name": "bachelor-house-manager-api",
+  "version": "6.2.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch src/server.js",
+    "start": "node src/server.js",
+    "worker": "node src/worker.js",
+    "cron-daily": "node src/jobs/daily-cron.js",
+    "cron-reminders": "node src/jobs/reminder-cron.js",
+    "bootstrap-admin": "node src/jobs/bootstrap-admin.js",
+    "indexes": "node src/jobs/create-indexes.js",
+    "check-schema": "node src/jobs/check-schema.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "compression": "^1.8.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.6.1",
+    "express": "^5.1.0",
+    "express-rate-limit": "^8.2.1",
+    "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.18.0",
+    "twilio": "^5.10.5",
+    "firebase-admin": "^13.5.0"
+  }
+}

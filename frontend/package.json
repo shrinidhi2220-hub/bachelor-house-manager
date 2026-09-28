@@ -1,0 +1,20 @@
+{
+  "name": "bachelor-house-manager-web",
+  "version": "6.2.5",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "npm run prepare-fcm && vite",
+    "build": "npm run prepare-fcm && vite build",
+    "preview": "vite preview",
+    "prepare-fcm": "node scripts/generate-fcm-sw.mjs"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "latest",
+    "vite": "latest",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "firebase": "^12.3.0"
+  },
+  "devDependencies": {}
+}

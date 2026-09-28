@@ -1,0 +1,162 @@
+services:
+  - type: web
+    name: bachelor-house-manager-api
+    runtime: node
+    rootDir: backend
+    buildCommand: npm install
+    preDeployCommand: npm run indexes
+    startCommand: npm start
+    plan: starter
+    numInstances: 2
+    healthCheckPath: /api/ready
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        sync: false
+      - key: TOKEN_SECRET
+        sync: false
+      - key: CLIENT_URL
+        sync: false
+      - key: WHATSAPP_ENABLED
+        value: "false"
+      - key: TWILIO_ACCOUNT_SID
+        sync: false
+      - key: TWILIO_AUTH_TOKEN
+        sync: false
+      - key: TWILIO_WHATSAPP_FROM
+        sync: false
+      - key: TWILIO_TASK_CONTENT_SID
+        sync: false
+      - key: FCM_ENABLED
+        value: "true"
+      - key: FCM_PROJECT_ID
+        sync: false
+      - key: FCM_CLIENT_EMAIL
+        sync: false
+      - key: FCM_PRIVATE_KEY
+        sync: false
+      - key: TWILIO_ANNOUNCEMENT_CONTENT_SID
+        sync: false
+      - key: TWILIO_REMINDER_CONTENT_SID
+        sync: false
+      - key: HOUSE_TIME_ZONE
+        value: Asia/Kolkata
+      - key: DAILY_GENERATE_HOUR
+        value: "6"
+      - key: DAILY_GENERATE_MINUTE
+        value: "0"
+      - key: RESEND_API_KEY
+        sync: false
+      - key: MAIL_FROM
+        sync: false
+      - key: EMAIL_VERIFICATION_TTL_HOURS
+        value: "24"
+      - key: API_RATE_LIMIT
+        value: "1200"
+      - key: AUTH_RATE_LIMIT
+        value: "15"
+
+  - type: worker
+    name: bachelor-house-manager-worker
+    runtime: node
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm run worker
+    plan: starter
+    numInstances: 1
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        sync: false
+      - key: TOKEN_SECRET
+        sync: false
+      - key: WHATSAPP_ENABLED
+        value: "false"
+      - key: TWILIO_ACCOUNT_SID
+        sync: false
+      - key: TWILIO_AUTH_TOKEN
+        sync: false
+      - key: TWILIO_WHATSAPP_FROM
+        sync: false
+      - key: TWILIO_TASK_CONTENT_SID
+        sync: false
+      - key: TWILIO_ANNOUNCEMENT_CONTENT_SID
+        sync: false
+      - key: TWILIO_REMINDER_CONTENT_SID
+        sync: false
+      - key: FCM_ENABLED
+        value: "true"
+      - key: FCM_PROJECT_ID
+        sync: false
+      - key: FCM_CLIENT_EMAIL
+        sync: false
+      - key: FCM_PRIVATE_KEY
+        sync: false
+
+  - type: cron
+    name: bachelor-house-manager-daily
+    runtime: node
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm run cron-daily
+    schedule: "*/15 * * * *"
+    plan: starter
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        sync: false
+      - key: HOUSE_TIME_ZONE
+        value: Asia/Kolkata
+      - key: DAILY_GENERATE_HOUR
+        value: "6"
+      - key: DAILY_GENERATE_MINUTE
+        value: "0"
+      - key: WHATSAPP_ENABLED
+        value: "true"
+      - key: FCM_ENABLED
+        value: "true"
+      - key: FCM_PROJECT_ID
+        sync: false
+      - key: FCM_CLIENT_EMAIL
+        sync: false
+      - key: FCM_PRIVATE_KEY
+        sync: false
+  - type: cron
+    name: bachelor-house-manager-reminders
+    runtime: node
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm run cron-reminders
+    schedule: "*/15 * * * *"
+    plan: starter
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        sync: false
+      - key: HOUSE_TIME_ZONE
+        value: Asia/Kolkata
+      - key: WHATSAPP_ENABLED
+        value: "true"
+      - key: TWILIO_ACCOUNT_SID
+        sync: false
+      - key: TWILIO_AUTH_TOKEN
+        sync: false
+      - key: TWILIO_WHATSAPP_FROM
+        sync: false
+      - key: TWILIO_REMINDER_CONTENT_SID
+        sync: false
+      - key: TWILIO_TASK_CONTENT_SID
+        sync: false
+      - key: FCM_ENABLED
+        value: "true"
+      - key: FCM_PROJECT_ID
+        sync: false
+      - key: FCM_CLIENT_EMAIL
+        sync: false
+      - key: FCM_PRIVATE_KEY
+        sync: false
+

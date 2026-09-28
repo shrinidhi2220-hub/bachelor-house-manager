@@ -1,0 +1,43 @@
+BACHELOR HOUSE MANAGER — PUBLIC SAAS v5
+
+LOCAL BACKEND
+1) Install MongoDB locally, or use MongoDB Atlas.
+2) Copy backend/.env.example to backend/.env.
+3) Set MONGODB_URI and a strong TOKEN_SECRET.
+4) In backend:
+   npm install
+   npm run indexes
+   npm run dev
+
+LOCAL FRONTEND
+1) In frontend:
+   npm install
+   npm run dev
+2) Open http://localhost:5173
+
+PUBLIC PRODUCT MODEL
+- Create House -> user becomes Admin/owner of that house.
+- Join House -> user becomes a Member of that house.
+- Every house has isolated MongoDB records.
+- Member screens are limited to Today's House, My Tasks and 7-Day Rotation.
+- The API enforces role and house ownership server-side.
+
+SCALING
+- Keep API stateless; no local JSON data, no in-memory schedule state.
+- Use 2+ Render web instances behind the Render load balancer.
+- Use MongoDB Atlas for durable shared state.
+- Run the worker separately for WhatsApp/outbox jobs.
+- Run the daily cron separately for schedule generation.
+
+1,000 REQUEST TEST
+node ops/load-test.mjs https://YOUR-BACKEND/api/health 1000 100
+
+IMPORTANT
+Never commit .env or credentials to GitHub.
+
+
+V6 PUSH + SECURITY
+- Admin and members now have a Security page.
+- FCM push is the primary notification channel; it stays disabled until Firebase keys are configured.
+- The API uses MongoDB as the shared source of truth and the Render blueprint has 2 API instances.
+- For production, configure FCM secrets in Vercel/Render rather than committing them.
